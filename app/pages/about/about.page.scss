@@ -1,0 +1,24 @@
+.contenido h1{
+    font-family: "Comic Sans MS";
+    text-align: center;
+}
+
+.contenido p{
+    font-family: "Comic Sans MS";
+    text-align: center;
+    text-decoration: underline;  
+}
+
+.contenido p:hover{
+    opacity: 0.5; 
+}
+
+.contenido div p:hover{
+    opacity: 1;
+}
+
+.contenido div h1{
+    font-family: "helvetica";
+    text-shadow: 0.1em 0.1em 0.2em black
+}
+

@@ -1,0 +1,18 @@
+<ion-header class="barra">
+  <ion-toolbar>
+    <ion-title>RegistrAPP</ion-title>
+  </ion-toolbar>
+  <img src="assets/logo.png" alt="" class="logo">
+</ion-header>
+<ion-content class="auth-form">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-button [routerLink]="['/login']" expand="block" color="primary">Iniciar sesión</ion-button>
+        <span class="divider line one-line">o</span>        
+        <span class="already">¿No tienes una cuenta?</span>
+        <ion-button [routerLink]="['/registration']" expand="block" color="danger">Registrarse</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
