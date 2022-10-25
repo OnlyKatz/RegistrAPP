@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 interface Componente{
   icon:string;
@@ -12,7 +14,33 @@ interface Componente{
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private alertController: AlertController,
+              private navController: NavController,) {}
+
+
+  async salir(){
+    const alert = await this.alertController.create({
+      header: 'Salir',
+      message: '¿Seguro que deseas cerrar sesión?',
+      buttons: [
+        {
+          text: 'No, seguir dentro',
+          handler: () =>{
+
+          }
+        },{
+          text: 'Si, estoy seguro',
+          handler: () => {
+            localStorage.removeItem('ingresado');
+            localStorage.removeItem('alumno');
+            localStorage.removeItem('profesor');
+            this.navController.navigateRoot('home');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
   componentes : Componente[] = [
     { 
@@ -36,9 +64,9 @@ export class AppComponent {
       redirecTo: '/about'
     },
     {
-      icon: 'log-out-outline',
-      name: 'Log Out',
-      redirecTo: '/home'
+      icon: 'eye-outline',
+      name: 'Noticias',
+      redirecTo:'/noticias',
     },
   ];
 

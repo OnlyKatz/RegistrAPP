@@ -1,27 +1,39 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="primary"></ion-back-button>
+      <ion-back-button defaultHref="/inicio"color="primary"></ion-back-button>
     </ion-buttons>
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Correo</ion-label>
-      <ion-input type="Email" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" required></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="primary" expand="block" [routerLink]="['/inicio']">Iniciar sesión</ion-button>
-        <a [routerLink]="['/forgot-password']" class="forgot">¿Olvidaste tu contraseña?</a>
-      </ion-col>
-    </ion-row>
-  </form>
+  <ion-card>
+    
+    <ion-card-header>
+      <ion-card-title>Login</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+        <form [formGroup]="formularioLogin">
+
+          <ion-item>
+            <ion-label position="floating">Correo: </ion-label>
+            <ion-input type="email" formControlName="correo"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password: </ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+        </form>
+        <br>
+        <ion-button (click)="Ingresar()" expand="block" fill="outline" shape="round">
+          Ingresar
+        </ion-button>
+        <ion-button [routerLink] = "['/registration']" color="secondary" expand="block" fill="outline" shape="round">Registrarse</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+

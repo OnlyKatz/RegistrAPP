@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu contentId="main" menuId="first" side="start">
+  <ion-menu contentId="main" menuId="first" side="start" swipeGesture="false">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menú</ion-title>
@@ -15,6 +15,10 @@
             {{ c.name }}
          </ion-item>
         </ion-menu-toggle>
+        <ion-item (click)="salir()" routerDirection="root"  detail="true">
+          <ion-icon slot="start" [name]="'exit-outline'" color="primary"></ion-icon>
+          <ion-label>Salir</ion-label>
+        </ion-item>
      </ion-list>
     </ion-content>
   </ion-menu>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { RegistroserviceService, Usuario } from '../../services/registroservice.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-inicio',
@@ -8,13 +12,19 @@ import { MenuController } from '@ionic/angular';
 })
 export class InicioPage implements OnInit {
 
-  constructor(private menuController: MenuController) { }
+  usuarios : Usuario[] = [];
+
+  constructor(private menuController: MenuController,
+              private alertController: AlertController,
+              private registroService: RegistroserviceService,) { }
 
   ngOnInit() {
+    
   }
 
   mostrarMenu(){
     this.menuController.open('first');
   }
 
+  
 }
