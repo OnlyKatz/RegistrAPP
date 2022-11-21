@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 
+
+
 interface Componente{
   icon:string;
   name:string;
@@ -16,7 +18,6 @@ interface Componente{
 export class AppComponent {
   constructor(private alertController: AlertController,
               private navController: NavController,) {}
-
 
   async salir(){
     const alert = await this.alertController.create({
@@ -39,8 +40,9 @@ export class AppComponent {
         }
       ]
     });
-    await alert.present();
+    await alert.present();   
   }
+
 
   componentes : Componente[] = [
     { 
@@ -52,6 +54,24 @@ export class AppComponent {
       icon: 'qr-code-outline',
       name: 'Generar QR',
       redirecTo: '/geneqr'
+    },
+    {
+      icon: 'book-outline',
+      name: 'About',
+      redirecTo: '/about'
+    },
+    {
+      icon: 'eye-outline',
+      name: 'Noticias',
+      redirecTo:'/noticias',
+    },
+  ];
+
+  componentesal : Componente[] = [
+    { 
+      icon: 'person-outline',
+      name: 'Perfil',
+      redirecTo: '/perfil'
     },
     {
       icon: 'camera',
@@ -69,5 +89,20 @@ export class AppComponent {
       redirecTo:'/noticias',
     },
   ];
+
+  devolver(){
+    if(localStorage.getItem('alumno')){
+      
+      return this.componentesal;
+    }else {
+      
+      return this.componentes;
+    }
+  }
+
+  prueba : Componente[] = this.devolver();
+
+  
+
 
 }

@@ -17,7 +17,7 @@ export class ProfesorGuard implements CanActivate {
       return true; 
     }
     else{
-      this.navController.navigateRoot('inicio');
+      this.navController.navigateRoot('inicioal');
       return false;
     }
   }

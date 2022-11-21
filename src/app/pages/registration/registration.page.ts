@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { RegistroserviceService, Usuario } from '../../services/registroservice.service';
 import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import {
   FormGroup, FormControl, Validators, FormBuilder
 } from '@angular/forms';
@@ -15,9 +16,11 @@ export class RegistrationPage implements OnInit {
 
   formularioRegistro: FormGroup; 
   newUsuario: Usuario = <Usuario>{};
+  usuarios: Usuario[] = [];
 
 
   constructor(private alertController: AlertController,
+              private navController: NavController,
               private registroService: RegistroserviceService,
               private toast: ToastController, 
               private fb:FormBuilder) {
@@ -36,6 +39,7 @@ export class RegistrationPage implements OnInit {
 
   async CrearUsuario(){
     var form = this.formularioRegistro.value;
+    var existe = 0;
     if (this.formularioRegistro.invalid){
       this.alertError();
     }
@@ -46,13 +50,38 @@ export class RegistrationPage implements OnInit {
     this.newUsuario.rolUsuario=form.rol;
     this.newUsuario.passUsuario = form.password;
     this.newUsuario.repassUsuario=form.confirmaPass;
-    this.registroService.addUsuario(this.newUsuario).then(dato=>{ 
-      this.newUsuario=<Usuario>{};
-      this.showToast('Usuario Creado!');
-    });
-    this.formularioRegistro.reset();
-  }
+
+    this.registroService.getUsuarios().then(datos=>{
+      this.usuarios = datos;
+      if(!datos || datos.length ==0){
+        this.registroService.addUsuario(this.newUsuario).then(dato=>{
+          this.newUsuario=<Usuario>{};
+          this.showToast('Usuario creado de forma satisfactoria');
+        });
+        this.formularioRegistro.reset();
+        this.navController.navigateRoot('login');
+      }else{
+        for (let obj of this.usuarios){
+          if (this.newUsuario.correoUsuario == obj.correoUsuario){
+            existe = 1;
+          }
+        }
+        if(existe == 1){
+          this.alertCorreoDuplicado();
+        }else{
+          this.registroService.addUsuario(this.newUsuario).then(dato=>{
+            this.newUsuario=<Usuario>{};
+            this.showToast('Usuario creado de forma satisfactoria');
+          });
+          this.formularioRegistro.reset();
+          this.navController.navigateRoot('login');
+        }
+      }
+    })
+    }
   }//findelmetodo
+
+
 
   async alertError(){
     const alert = await this.alertController.create({ 
@@ -69,6 +98,15 @@ export class RegistrationPage implements OnInit {
       duration: 2000
     })
     await toast.present();
+  }
+
+  async alertCorreoDuplicado(){
+    const alert = await this.alertController.create({ 
+      header: '¡Error!',
+      message: 'El correo ingresado ya existe',
+      buttons: ['Aceptar']
+    })
+    await alert.present();
   }
 
 

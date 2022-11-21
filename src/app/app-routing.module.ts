@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule),
-    canActivate: [IngresadoGuard]
+    canActivate: [ProfesorGuard]
   },
   {
     path: 'login',
@@ -24,12 +24,12 @@ const routes: Routes = [
   {
     path: 'geneqr',
     loadChildren: () => import('./pages/geneqr/geneqr.module').then( m => m.GeneqrPageModule),
-    canActivate:[IngresadoGuard, ProfesorGuard]
+    canActivate:[ProfesorGuard]
   },
   {
     path: 'readqr',
     loadChildren: () => import('./pages/readqr/readqr.module').then( m => m.ReadqrPageModule),
-    canActivate:[IngresadoGuard, AlumnoGuard]
+    canActivate:[AlumnoGuard]
   },
   {
     path: 'registration',
@@ -60,6 +60,11 @@ const routes: Routes = [
     path: 'noticias',
     loadChildren: () => import('./pages/noticias/noticias.module').then( m => m.NoticiasPageModule),
     canActivate:[IngresadoGuard]
+  },
+  {
+    path: 'inicioal',
+    loadChildren: () => import('./pages/inicioal/inicioal.module').then( m => m.InicioalPageModule),
+    canActivate:[IngresadoGuard, AlumnoGuard]
   },
 ];
 

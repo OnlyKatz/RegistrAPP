@@ -1,14 +1,14 @@
 <ion-app>
   <ion-menu contentId="main" menuId="first" side="start" swipeGesture="false">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar class="hola">
         <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
       <ion-list>
-        <ion-menu-toggle *ngFor="let c of componentes" >
+        <ion-menu-toggle *ngFor="let c of prueba" >
           <ion-item [routerLink]="c.redirecTo"
               detail=true>
             <ion-icon [name]="c.icon" slot="start" color="primary"></ion-icon>

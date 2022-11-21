@@ -43,16 +43,16 @@ export class LoginPage implements OnInit {
           localStorage.setItem('profesor','true');
           this.navController.navigateRoot('inicio');
           var nomMensaje = obj.nomUsuario;
-          this.mensajeSaludo(nomMensaje);
+          this.mensajeSaludo(nomMensaje);          
         }
         if (f.correo == obj.correoUsuario && f.password==obj.passUsuario && obj.rolUsuario==='Alumno'){
           a=1;
           console.log('ingresado');
-          localStorage.setItem('ingresado','true');
           localStorage.setItem('alumno','true');
-          this.navController.navigateRoot('inicio');
+          localStorage.setItem('ingresado','true');        
+          this.navController.navigateRoot('inicioal');
           var nomMensaje = obj.nomUsuario;
-          this.mensajeSaludo(nomMensaje);
+          this.mensajeSaludo(nomMensaje);         
         }
       }//findelfor
       if(a==0){
@@ -77,8 +77,12 @@ export class LoginPage implements OnInit {
       subHeader: 'Bienvenido '+nomMensaje,
       message: 'Gracias por visitar RegistrAPP',
       buttons: ['OK'],
+      
     });
     await alert.present();
+    await setTimeout(function(){
+      window.location.reload();
+   }, 5000);
   }
 
 
